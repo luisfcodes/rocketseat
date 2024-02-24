@@ -1,30 +1,30 @@
 // Boleanos
 
-const user = {
+const userData = {
   name: 'Diego Fernandes',
   height: 190,
   hasTicket: true,
 }
 
-const necessaryHeight = 130
+const MinimumHeightForTheToy = 130
 
 const currentHour = new Date().getHours()
 
-const parkOpen = currentHour > 9 && currentHour < 18
+const IsTheParkOpen = currentHour > 9 && currentHour < 18
 
-if (!parkOpen) {
+if (!IsTheParkOpen) {
   throw new Error('O parque está fechado!')
 }
 
-const ticket = user.hasTicket
+const userHasATicket = userData.hasTicket
 
-if (!ticket) {
+if (!userHasATicket) {
   throw new Error('O Diego não possui um bilhete para entrar no parque!')
 }
 
-const enterToy = user.height > necessaryHeight
+const canTheUserEnterTheToy = userData.height > MinimumHeightForTheToy
 
-if (!enterToy) {
+if (!canTheUserEnterTheToy) {
   throw new Error('O Diego não pode entrar no brinquedo!')
 } 
 
