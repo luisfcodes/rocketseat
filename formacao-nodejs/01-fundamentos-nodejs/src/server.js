@@ -1,9 +1,13 @@
+import { randomUUID } from 'node:crypto';
 import http from 'node:http';
+import { json } from './middlewares/json.js';
 
 const users = []
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   const { url, method } = req;
+
+  await json(req, res)
 
   if(url === '/users' && method === 'GET') {
     return res
@@ -12,10 +16,12 @@ const server = http.createServer((req, res) => {
   }
 
   if(url === '/users' && method === 'POST') {
+    const { name, email } = req.body
+
     users.push({
-      id: Math.random(),
-      name: 'Lucas',
-      email: 'lucas@gmail.com'
+      id: randomUUID(),
+      name,
+      email
     })
 
     return res.writeHead(201).end()

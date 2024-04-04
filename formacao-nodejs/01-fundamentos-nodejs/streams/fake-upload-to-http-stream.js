@@ -7,7 +7,7 @@ class OneToHundredStrem extends Readable {
     const num = this.index++
 
     setTimeout(() => {
-      if (num > 100) {
+      if (num > 5) {
         this.push(null)
       } else {
         const buf = Buffer.from(`${num}\n`)
@@ -22,4 +22,4 @@ fetch('http://localhost:3334', {
   method: 'POST',
   body: new OneToHundredStrem(),
   duplex: "half",
-})
+}).then(res => res.text()).then(console.log)
