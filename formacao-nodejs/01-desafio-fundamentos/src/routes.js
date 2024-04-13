@@ -3,32 +3,30 @@ import { Database } from './database.js'
 
 const database = new Database()
 
-const tasks = [
-  {
-    id: randomUUID(),
-    title: 'Estudar Node.js',
-    description: 'Estudar os fundamentos do Node.js',
-    completed_at: null,
-    created_at: new Date(),
-    updated_at: new Date()
-  },
-  {
-    id: randomUUID(),
-    title: 'Estudar React',
-    description: 'Estudar os fundamentos do React',
-    completed_at: null,
-    created_at: new Date(),
-    updated_at: new Date()
-  }
-]
-
-
 export const routes = [
   {
     method: 'GET',
     path: /^\/tasks$/,
     handler: (req, res) => {
-      return res.writeHead(200, { 'Content-Type': 'application/json' }).end(JSON.stringify(tasks))
+      if (req.url === '/tasks' && !req.body) {
+        const tasks = database.select()
+
+        return res.end(JSON.stringify(tasks))
+      }
+
+      const { title, description } = req.body
+
+      if (req.url === '/tasks' && ( title || description)) {
+        const tasks = database.selectByTitleOrDescription(title, description)
+
+        if (tasks.length === 0) {
+          return res.writeHead(404).end()
+        }
+
+        return res.end(JSON.stringify(tasks))
+      }
+
+      return res.writeHead(400).end()
     }
   },
   {
@@ -50,9 +48,84 @@ export const routes = [
         updated_at: new Date()
       }
 
-      tasks.push(task)
+      try {
+        database.insert(task)
+        res.writeHead(201).end(JSON.stringify(task))
+      } catch (error) {
+        res.writeHead(500).end()
+      }
+    }
+  },
+  {
+    method: 'PUT',
+    path: /^\/tasks\/([a-z0-9-]+)$/,
+    handler: (req, res) => {
+      const [, id] = req.url.match(/^\/tasks\/([a-z0-9-]+)$/) ?? []
 
-      return res.writeHead(201).end()
+      if (!id || !req.body) {
+        return res.writeHead(400).end()
+      }
+
+      const { title, description } = req.body
+
+      const task = database.select()[id]
+
+      if (!task) {
+        return res.writeHead(404).end()
+      }
+
+      const newTask = {
+        ...task,
+        title: title ?? task.title,
+        description: description ?? task.description,
+        updated_at: new Date()
+      }
+
+      database.update(id, newTask)
+
+      return res.writeHead(204).end()
+    }
+  },
+  {
+    method: 'DELETE',
+    path: /^\/tasks\/([a-z0-9-]+)$/,
+    handler: (req, res) => {
+      const [, id] = req.url.match(/^\/tasks\/([a-z0-9-]+)$/) ?? []
+
+      if (!id) {
+        return res.writeHead(400).end()
+      }
+
+      const task = database.select()[id]
+
+      if (!task) {
+        return res.writeHead(404).end()
+      }
+
+      database.delete(id)
+
+      return res.writeHead(204).end()
+    }
+  },
+  {
+    method: 'PATCH',
+    path: /^\/tasks\/([a-z0-9-]+)\/complete$/,
+    handler: (req, res) => {
+      const [, id] = req.url.match(/^\/tasks\/([a-z0-9-]+)\/complete$/) ?? []
+
+      if (!id) {
+        return res.writeHead(400).end()
+      }
+
+      const task = database.select()[id]
+
+      if (!task) {
+        return res.writeHead(404).end()
+      }
+
+      database.completeOrReopen(id)
+
+      return res.writeHead(204).end()
     }
   }
 ]

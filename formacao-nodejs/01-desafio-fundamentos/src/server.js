@@ -11,6 +11,7 @@ const server = http.createServer(async (req, res) => {
   const route = routes.find(route => route.method === method && url.match(route.path));
 
   if(route){
+    res.setHeader('Content-Type', 'application/json')
     return route.handler(req, res);
   }
 
