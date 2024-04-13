@@ -88,12 +88,13 @@ export const routes = [
   },
   {
     method: 'DELETE',
-    path: /^\/tasks\/([a-z0-9-]+)$/,
+    path: /^\/tasks\/?([a-z0-9-]*)?$/,
     handler: (req, res) => {
       const [, id] = req.url.match(/^\/tasks\/([a-z0-9-]+)$/) ?? []
 
       if (!id) {
-        return res.writeHead(400).end()
+        database.deleteAll()
+        return res.writeHead(204).end()
       }
 
       const task = database.select()[id]

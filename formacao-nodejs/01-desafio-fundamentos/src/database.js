@@ -54,4 +54,9 @@ export class Database {
       this.#persist()
     }
   }
+
+  deleteAll(){
+    this.#database = {}
+    this.#persist()
+  }
 }
