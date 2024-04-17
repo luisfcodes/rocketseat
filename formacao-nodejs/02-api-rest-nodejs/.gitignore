@@ -1,4 +1,12 @@
+# Dependicies
 /node_modules/
+
+# Database
 db/*
+
+# Environment
 .env
 .env.test
+
+# Build
+build
