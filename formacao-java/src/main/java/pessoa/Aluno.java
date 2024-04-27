@@ -11,4 +11,8 @@ public class Aluno extends  Pessoa {
     this.matricula = matricula;
   }
 
+  String imprimirDadosDaPessoa(){
+    System.out.println(super.imprimirDadosDaPessoa());
+    return "O tipo deste usuário é Aluno";
+  }
 };

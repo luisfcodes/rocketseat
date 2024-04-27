@@ -10,4 +10,9 @@ public class Professor extends Pessoa {
   public void setRegistro(String registro) {
     this.registro = registro;
   }
+
+  String imprimirDadosDaPessoa(){
+    System.out.println(super.imprimirDadosDaPessoa());
+    return "O tipo deste usuário é Professor";
+  }
 }
