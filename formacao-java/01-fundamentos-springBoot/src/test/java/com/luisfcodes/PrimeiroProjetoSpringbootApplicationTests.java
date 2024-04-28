@@ -1,4 +1,4 @@
-package com.luisfcodes.main;
+package com.luisfcodes;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
