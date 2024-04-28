@@ -1,6 +1,7 @@
 package com.luisfcodes.controller;
 
 import jakarta.websocket.server.PathParam;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -37,6 +38,11 @@ public class PrimeiraController {
   @PostMapping("/metodoComVariosHeadersParams")
   public String metodoComVariosHeadersParams(@RequestHeader Map<String, String> allParams) {
     return "metodoComVariosHeadersParams\n" + allParams.entrySet();
+  }
+
+  @GetMapping("/metodoResponseEntity")
+  public ResponseEntity<Object> metodoResponseEntity() {
+    return ResponseEntity.status(400).body("Mensagem de retorno");
   }
 
   record Usuario(String username){}
