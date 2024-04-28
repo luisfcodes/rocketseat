@@ -1,4 +1,4 @@
-package conta;
+package fundamentos_java.conta;
 
 public class TesteContaBancaria {
   public static void main(String[] args) {

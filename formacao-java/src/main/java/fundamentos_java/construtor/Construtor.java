@@ -1,4 +1,4 @@
-package construtor;
+package fundamentos_java.construtor;
 
 public class Construtor {
   private int numero;

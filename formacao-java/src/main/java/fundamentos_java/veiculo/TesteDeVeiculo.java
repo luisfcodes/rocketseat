@@ -1,4 +1,4 @@
-package veiculo;
+package fundamentos_java.veiculo;
 
 public class TesteDeVeiculo {
   public static void main(String[] args) {

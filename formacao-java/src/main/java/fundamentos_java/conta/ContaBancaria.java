@@ -1,4 +1,4 @@
-package conta;
+package fundamentos_java.conta;
 
 public class ContaBancaria {
   private String numero;

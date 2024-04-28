@@ -1,4 +1,4 @@
-package veiculo;
+package fundamentos_java.veiculo;
 
 public class Carro implements Veiculo{
 

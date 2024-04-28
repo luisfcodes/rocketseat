@@ -1,4 +1,4 @@
-package pessoa;
+package fundamentos_java.pessoa;
 
 public class TesteDePessoa {
   public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package primeirasAulas;
+package fundamentos_java.primeirasAulas;
 
 import java.util.HashMap;
 import java.util.Map;
