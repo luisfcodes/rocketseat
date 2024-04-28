@@ -1,4 +1,4 @@
-package fundamentos_java.pessoa;
+package pessoa;
 
 public class Professor extends Pessoa {
   private String registro;

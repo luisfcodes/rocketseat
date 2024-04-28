@@ -1,6 +1,6 @@
-package fundamentos_java.excecoes;
+package excecoes;
 
-import fundamentos_java.pessoa.Pessoa;
+import pessoa.Pessoa;
 
 public class Excecoes {
   // Checked exceptions

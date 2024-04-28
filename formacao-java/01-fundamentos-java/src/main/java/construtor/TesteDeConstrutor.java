@@ -1,4 +1,4 @@
-package fundamentos_java.construtor;
+package construtor;
 
 public class TesteDeConstrutor {
   public static void main(String[] args) {

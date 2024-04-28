@@ -1,4 +1,4 @@
-package fundamentos_java.primeirasAulas;
+package primeirasAulas;
 
 public class PrimeiraClasse {
   public static void main(String[] args) {
