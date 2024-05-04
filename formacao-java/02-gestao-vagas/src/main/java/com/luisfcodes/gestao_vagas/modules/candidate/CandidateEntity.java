@@ -1,6 +1,7 @@
 package com.luisfcodes.gestao_vagas.modules.candidate;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -12,7 +13,8 @@ public class CandidateEntity {
   private UUID id;
   private String name;
 
-  @Pattern(regexp = "^(?!\\s*$).+", message = "Nome de usuário inválido, não deve conter espaço")
+  @NotBlank()
+  @Pattern(regexp = "\\S+", message = "Nome de usuário inválido, não deve conter espaço")
   private String username;
 
   @Email(message = "Insira um e-mail válido")
